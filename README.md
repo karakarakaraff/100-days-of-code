@@ -44,3 +44,18 @@ I could ensure it was working by checking the JSON:
 ```
 
 Overall, it was a very painful learning experience and even cost me a 1-star review on my skill. However, now that the skill is going through certification testing again and will likely be back into production tomorrow, I'm feeling confident that the potential good reviews will outweigh the bad one. I've also walked away from this knowing that I have what it takes to debug and quickly take action. **The biggest takeaway today wasn't necessarily any specific coding knowledge, but instead, it was how to react to a bug in production.** I'm glad today is over!
+
+### Day 4
+I got to leave Alexa to the  certification process, so I'm back with my intermediate mobile web development course through [Udacity's Grow With Google scholarship](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html). I left off on day 2 with an intro to service workers, and I continued that today by learning how to completely handle a browser request with a service worker, all without ever touching the network. It's actually pretty simple! Inside the service worker itself, you can write a chunk of code like this:
+
+```
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    new Response('<h1>Hello, world!</h1><p>I am a service worker.</p>', {
+      headers: {'content-type': 'text/html'}
+    })
+  );
+});
+```
+
+Now, no matter what request the browser makes, and no matter if the network is on, off, slow, etc., it will display the response above. However, it's a very simple response that doesn't take into account the user experience at all, so that part will come tomorrow.
