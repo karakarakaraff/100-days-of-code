@@ -84,7 +84,6 @@ Here are some of the references I came across:
 
 Doing this today was a bit of a distraction -- I should really be focusing all of my energy on the mobile web development stuff. My goal tomorrow is to put in at least four hours with the course so I can feel like I'm caught up with it. I only have nine more weeks to finish.
 
-
 ### Day 6
 Wow, I made a ton of progress with service workers today! Last time, I learned how to intercept a request from the browser by ignoring the network entirely and responding with a simple HTML response. Today, I took that further by:
 * Responding to specific requests and returning something that lives on the network (for example, for every .jpg file the browser requests, I can return the same gif, thus turning every image on the website into that gif)
@@ -98,4 +97,13 @@ Wow, I made a ton of progress with service workers today! Last time, I learned h
 * Setting up the service worker to handle content updates, thus creating new caches
   * [task-handling-updates](https://github.com/karakarakaraff/wittr/blob/task-handling-updates/public/js/sw/index.js)
 
-  Seeing exactly how the service worker does its job makes me even more excited to implement offline-first design in future web projects. It feels almost revolutionary to be able to deliver content regardless of the network connection!
+Seeing exactly how the service worker does its job makes me even more excited to implement offline-first design in future web projects. It feels almost revolutionary to be able to deliver content regardless of the network connection!
+
+### Day 7
+Coding today was a challenge because I was sooooo tired, but I powered through and finished the entire service worker section of the mobile web course. Hurray! As promised, there are more user experience upgrades:
+* Notify the user when there's an update, which means there's a new service worker waiting
+  * [task-update-notify](https://github.com/karakarakaraff/wittr/compare/master...task-update-notify)
+* Give the user the option to reload the page, which will push the new service worker into action
+  * [task-update-reload](https://github.com/karakarakaraff/wittr/compare/master...task-update-reload)
+* Swap out the root page for the skeleton page so, even if the network is down or slow, the user will see our branding and custom messages instead of browser errors
+  * [task-page-skeleton](https://github.com/karakarakaraff/wittr/commit/4650723a59914a58371847945cc20df062dcd866)
