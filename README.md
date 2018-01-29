@@ -107,3 +107,105 @@ Coding today was a challenge because I was sooooo tired, but I powered through a
   * [task-update-reload](https://github.com/karakarakaraff/wittr/compare/master...task-update-reload)
 * Swap out the root page for the skeleton page so, even if the network is down or slow, the user will see our branding and custom messages instead of browser errors
   * [task-page-skeleton](https://github.com/karakarakaraff/wittr/commit/4650723a59914a58371847945cc20df062dcd866)
+
+### Day 8
+Today, I moved on to the next section of the course, which is all about IndexedDB and caching. To get started, there's a little crash course intro to IndexedDB and an accompanying library, [IndexedDB Promised](https://github.com/jakearchibald/idb). The crash course was half theory (for example, why are promises so important that we want to use the library?) and half how-to. I learned the important parts, which are:
+* Creating a database with `.open()`
+```
+var dbPromise = idb.open('test-db', 1, function(upgradeDb) {
+  var keyValStore = upgradeDb.createObjectStore('keyval');
+  keyValStore.put('world', 'hello');
+});
+```
+
+* Updating (aka upgrading) a database with changes via switch statements
+```
+var dbPromise = idb.open('test-db', 2, function(upgradeDb) {
+  switch(upgradeDb.oldVersion) {
+    case 0:
+      var keyValStore = upgradeDb.createObjectStore('keyval');
+      keyValStore.put('world', 'hello');
+    case 1:
+      upgradeDb.createObjectStore('people', { keyPath: 'name' });
+  }
+});
+```
+
+* Reading specific information from a database store based on the key with `.get()`
+```
+dbPromise.then(function(db){
+  var tx = db.transaction('keval');
+  var keyValStore = tx.objectStore('keyval');
+  return keyValStore.get('hello');
+}).then(function(val){
+  console.log('The value of "hello" is:', val);
+});
+```
+
+* Reading everything from a database store wth `.getAll()`
+```
+dbPromise.then(function(db){
+  var tx = db.transaction('people');
+  var peopleStore = tx.objectStore('people');
+  return peopleStore.getAll();
+}).then(function(val){
+  console.log('People:', people);
+});
+```
+
+* Writing a key:value pair to a database store with `.put()`
+```
+dbPromise.then(function(db){
+  var tx = db.transaction('keyval', 'readwrite');
+  var keyValStore = tx.objectStore('keyval');
+  keyValStore.put('bar', 'foo');
+  return tx.complete;
+}).then(function(){
+  console.log('Added foo:bar to keyval');
+});
+```
+
+* Writing an object to the database store with `.put()`
+```
+dbPromise.then(function(db){
+  var tx = db.transaction('people', 'readwrite');
+  var peopleStore = tx.objectStore('people');
+  peopleStore.put({
+    name: 'Sam',
+    age: 25,
+    favoriteAnimal: 'dog'
+  });
+  return tx.complete;
+}).then(function(){
+  console.log('Person added to people');
+});
+```
+*Note: I was left with the impression that this code may have looked slightly different if I needed to indicate what the key would be. However, when this particular database store for people got set up (see line 129 with `('people', { keyPath: 'name' })`), the key is set to automatically be the person's name, so you don't have to specify the key in the .put() above.*
+
+* Indexing the database by something other than the key, which involves multiple steps:
+```
+var dbPromise = idb.open('test-db', 4, function(upgradeDb) {
+  switch(upgradeDb.oldVersion) {
+  ...
+  ...
+    case 3:
+      // create a new index with these two lines
+      var peopleStore = upgradeDb.transaction.objectStore('people');
+      peopleStore.createIndex('animal', 'favoriteAnimal');
+  }
+});
+
+// then set up a transaction to get all the people who like a specific value in that index
+dbPromise.then(function(db) {
+  var tx = db.transaction('people');
+  var peopleStore = tx.objectStore('people');
+  var animalIndex = peopleStore.index('animal');
+
+  return animalIndex.getAll('cat');
+}).then(function(people) {
+  console.log('Cat people:', people);
+});
+
+```
+
+Anyway, I have a fascination with databases and querying them and organizing the data, so even though most students in the course are saying this section is the hardest and most boring, I have a feeling it might be one of my favorite (though definitely still hard). Also, I'm realizing the more I go through this course that I still do not have my head wrapped around promises and callbacks. Actually, I think I have at least somewhat of a handle on callbacks, but promises ... what?!? I've been googling and saving a lot of resources, plus bookmarking other resources shared by students in the program, so I'm going to make it a priority to fully learn and understand promises and callbacks as soon as I finish this course. I don't necessarily have to understand them now to make the code work, but I want to make sure I understand them in the future when I'm writing my own code.
