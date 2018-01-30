@@ -226,9 +226,24 @@ Lastly, now that the browser is storing all these posts, what do you do when the
 
 Tomorrow, I'll learn the last piece of the puzzle, which is how to store and retrieve images. I'm pretty excited about it!
 
-##### RESOURCE 
+##### RESOURCE
 Udacity encourages students to be active on the forums, so I've been setting aside time each day for that as well. Today, someone had asked about JavaScript promises, and since I said yesterday that I'm still confused by them, I opened the thread to see how other people would explain them. And that's when I found this fantastic resource!
 
 [JavaScript Promises: An Introduction](https://developers.google.com/web/fundamentals/primers/promises)
 
 I've found plenty of other resources about promises, but this one really stands out because it's written by the instructor of the course, so I know it will definitely come in handy as I progress through each session. I'm going to make it required reading for myself at some point this week.
+
+### Day 10
+I finished the offline-first part of the course today. Hurray! I already cached and stored the skeleton of the page and all of the static content, so that just left dealing with image assets. Dealing with images is a bit different than the rest of the site content because the way databases and caches deal with images is different. Basically, if you have to pull an image from a database, you have to wait until the entire image is ready to send. On the other hand, a cache can send the image bit by bit, so you can see on the screen as it loads. Using caches for images is preferable because of the increased performance and the better used experience.
+* [task-cache-photos](https://github.com/karakarakaraff/wittr/commit/cbe409fb24d8853b9df93d7777fd47743ef4be87)
+
+Additionally, you have to keep in mind that images can take up a lot of space, so you don't want cache more than you need. Just like the database store with posts is set to clean itself, the image cache can clean itself as well. With posts, you keep a certain number. With images, though, there's no set number -- you check the posts to see which images are included, then delete anything that isn't included.
+* [task-clean-photos](https://github.com/karakarakaraff/wittr/commit/8493cb3fe09a122d11918084d9102880d57f520e)
+
+Avatars are a bit different. Since users can change their avatars, you not only want to cache all of the avatars, but you want to check the network for any avatar updates, then overwrite the avatars as needed.
+* [task-cache-avatars](https://github.com/karakarakaraff/wittr/commit/ca10602ad71175fbf125daa75e7fedc473cbb0ff)
+
+Since all of the work for the offline-first project was done in a bunch of separate branches, I wanted to get all of the changes in one place along with comments in the code that explain what each piece is doing. I created a new branch called offline-complete, then merged it with master. And voila! A complete transition from an online-only web app to an offline-first web app.
+* [merged offline-complete](https://github.com/karakarakaraff/wittr/commit/5808a8efda310264f1a1f2648017dc956a4db616)
+
+The second half of the course will be dedicated to learning ES6 and expanding my JavaScript skills. I'm equally excited about this part because I know I can tremendously improve the way I write code. I've been writing and using JavaScript for a little more than a year now, and even though I can typically program things to work and get the outcome I want, I know there's probably a better way to get to that outcome. Coding is a craft, so it's just going to take time, practice and challenging myself to get better.
