@@ -264,3 +264,52 @@ In addition to that, I also experimented a bit with DynamoDB again, picking up w
 Once again, I found a bunch of resources online and tons of people having the exact same problem. As it turns out, when Alexa persists the session attributes to the database, she also saves the game state there. To complicate things, what the [documentation](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs#skill-state-management) says to do doesn't work, though several people have found workarounds ([here](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs/issues/69) and [here](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs/issues/159)). Based on Amazon's response to this, it seems it's a known issue and they've put in a feature request to simplify it, but until then ... ``¯\_(ツ)_/¯``
 
 I've got the issue under control in testing and have not pushed it to production (never make the same mistake twice!), so hopefully I can figure this out soon enough. However, there is a long, long delay between me setting my session attributes in a game and the database updating -- I'm talking hours. I don't know what the deal is, but it means I'll have to come back to this issue another time.
+
+### Day 12
+Back to the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html)! The rest of the course seems to be less about actual project development and more about learning ES6. Honestly, bundling ES6 with this course was a hugely pleasant surprise for me because I've seen ES6 used in quite a few places but always wondered why it's different than the version of JavaScript I know and love. And actually, if you look at the [Alexa skill samples](), you'll see they're all written in ES6, so they have variables like `const` and strings that include `$s`, and I tried to incorporate as much as I understood in my own [Oregon Trail skill](), but you can see I still have a lot to learn.
+
+As I go through Udacity's content, I'm also going to cross reference with another resource I found: [ES6 Articles by Wes Bos](https://github.com/wesbos/es6-articles). I think it will be good to read from both sources to ensure I get all the concepts and don't get left with any questions. In other words, I've got my bases covered!
+
+Anyway, today I learned:
+* The use cases for `const` and `let`, which inevitably leads to the death of `var`.
+* How `const`, `let` and `var` act under hoisting, which is why ES6 is killing off `var` (I mean, you can still use it, but there's no reason to)
+  * *Note to self:* I'll have to look into how `let` and `const` affect function expressions (such as `var functionNameHere = function() {};`). I prefer writing function expressions as opposed to function declarations (`function functionNameHere() {}`).
+  * With just a bit of googling, it looks like this is where arrow functions will come in ... maybe? That will be later in the course.
+* How to use template literals and string concatenation -- no more `+` or `\n` needed! Instead, wrap the string in backticks (not single or double quotes), and use `${expression}` for placeholders. Line breaks can be directly inserted in the code, and they will be preserved. Here's an example:
+
+**The old way:**
+
+`var message = student.name + ', \nPlease see ' + teacher.name + ' in ' + teacher.room + ' to pick up your report card.\nThank you!';`
+
+**The new way:**
+```
+let message = `${student.name},
+
+  Please see ${teacher.name} in ${teacher.room} to pick up your report card.
+
+  Thank you!`;
+```
+
+* This kind of simplification of template literals also helps immensely with HTML fragments:
+```
+function createAnimalTradingCardHTML(animal) {
+  const cardHTML = `<div class="card">
+    <h3 class="name">${animal.name}</h3>
+    <img src="${animal.name}.jpg" alt="${animal.name}" class="picture">
+    <div class="description">
+      <p class="fact">${animal.fact}</p>
+      <ul class="details">
+        <li><span class="bold">Scientific Name</span>: ${animal.scientificName}</li>
+        <li><span class="bold">Average Lifespan</span>: ${animal.lifespan}</li>
+        <li><span class="bold">Average Speed</span>: ${animal.speed}</li>
+        <li><span class="bold">Diet</span>: ${animal.diet}</li>
+      </ul>
+    <p class="brief">${animal.summary}</p>
+    </div>
+  </div>`;
+
+  return cardHTML;
+}
+```
+
+It's so beautiful! When I finish this course, my next project is to rebuild my portfolio website as a static site so I can host it on [GitHub Pages](https://pages.github.com/) (it's currently a Wordpress site, which you can see here: [karaflaherty.com](http://karaflaherty.com/)). I absolutely CANNOT WAIT to write my HTML fragments like this!
