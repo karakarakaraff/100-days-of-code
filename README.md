@@ -8,7 +8,7 @@ I started the intermediate mobile web development course through [Udacity's Grow
 To get started on the offline-first project, I cloned the course's Wittr site and pushed it to my own repo: [karakarakaraff/witter](https://github.com/karakarakaraff/wittr.git). The site is currently built for online-only access, and I will be transitioning it to offline first. I also tested out the different types of connectivity (perfect, slow, lie-fi, offline) via a node server to give me a better idea of how an online-only site behaves under each circumstance.
 
 ### Day 2
-I got an intro to service workers through the intermediate mobile web development course. From my understanding, a service worker is basically a script that intercepts all of the requests a browser makes. So, for example, instead of the browser going directly to the network, the service worker can redirect the browser to its cache, send the request on to the network, and so on. This is the first key to offline first development since the service worker can determine if the network is up, down, slow, etc. (I'm assuming, I haven't actually gotten to how that part works yet), then direct the browser accordingly.
+I got an intro to service workers through the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html). From my understanding, a service worker is basically a script that intercepts all of the requests a browser makes. So, for example, instead of the browser going directly to the network, the service worker can redirect the browser to its cache, send the request on to the network, and so on. This is the first key to offline first development since the service worker can determine if the network is up, down, slow, etc. (I'm assuming, I haven't actually gotten to how that part works yet), then direct the browser accordingly.
 
 [Added service worker registration and logging of fetch requests](https://github.com/karakarakaraff/wittr/commit/cb6faa3d17768b07efb0754250405c544999504d): With this commit, I registered the service worker to the website. This includes bypassing the service worker on older browsers that can't handle service workers, plus logging a success or failure for registration on browsers that can handle service workers. Additionally, I set up a bit of code inside the service worker to log each request the browser makes. Then, using Chrome's dev tools, I can see the log.
 
@@ -46,7 +46,7 @@ I could ensure it was working by checking the JSON:
 Overall, it was a very painful learning experience and even cost me a 1-star review on my skill. However, now that the skill is going through certification testing again and will likely be back into production tomorrow, I'm feeling confident that the potential good reviews will outweigh the bad one. I've also walked away from this knowing that I have what it takes to debug and quickly take action. **The biggest takeaway today wasn't necessarily any specific coding knowledge, but instead, it was how to react to a bug in production.** I'm glad today is over!
 
 ### Day 4
-I got to leave Alexa to the  certification process, so I'm back with my intermediate mobile web development course through [Udacity's Grow With Google scholarship](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html). I left off on day 2 with an intro to service workers, and I continued that today by learning how to completely handle a browser request with a service worker, all without ever touching the network. It's actually pretty simple! Inside the service worker itself, you can write a chunk of code like this:
+I got to leave Alexa to the  certification process, so I'm back with my [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html). I left off on day 2 with an intro to service workers, and I continued that today by learning how to completely handle a browser request with a service worker, all without ever touching the network. It's actually pretty simple! Inside the service worker itself, you can write a chunk of code like this:
 
 ```
 self.addEventListener('fetch', function(event) {
@@ -85,7 +85,7 @@ Here are some of the references I came across:
 Doing this today was a bit of a distraction -- I should really be focusing all of my energy on the mobile web development stuff. My goal tomorrow is to put in at least four hours with the course so I can feel like I'm caught up with it. I only have nine more weeks to finish.
 
 ### Day 6
-Wow, I made a ton of progress with service workers today! Last time, I learned how to intercept a request from the browser by ignoring the network entirely and responding with a simple HTML response. Today, I took that further by:
+Wow, I made a ton of progress with service workers through the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) today! Last time, I learned how to intercept a request from the browser by ignoring the network entirely and responding with a simple HTML response. Today, I took that further by:
 * Responding to specific requests and returning something that lives on the network (for example, for every .jpg file the browser requests, I can return the same gif, thus turning every image on the website into that gif)
   * [gif-response](https://github.com/karakarakaraff/wittr/blob/gif-response/public/js/sw/index.js)
 * Responding depending on the request and the network (for example, if the request returns a 404 error, I can return a specific response; the same can be done if the request fails due to the network being unavailable)
@@ -100,7 +100,7 @@ Wow, I made a ton of progress with service workers today! Last time, I learned h
 Seeing exactly how the service worker does its job makes me even more excited to implement offline-first design in future web projects. It feels almost revolutionary to be able to deliver content regardless of the network connection!
 
 ### Day 7
-Coding today was a challenge because I was sooooo tired, but I powered through and finished the entire service worker section of the mobile web course. Hurray! As promised, there are more user experience upgrades:
+Coding today was a challenge because I was sooooo tired, but I powered through and finished the entire service worker section of the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html). Hurray! As promised, there are more user experience upgrades:
 * Notify the user when there's an update, which means there's a new service worker waiting
   * [task-update-notify](https://github.com/karakarakaraff/wittr/compare/master...task-update-notify)
 * Give the user the option to reload the page, which will push the new service worker into action
@@ -109,7 +109,7 @@ Coding today was a challenge because I was sooooo tired, but I powered through a
   * [task-page-skeleton](https://github.com/karakarakaraff/wittr/commit/4650723a59914a58371847945cc20df062dcd866)
 
 ### Day 8
-Today, I moved on to the next section of the course, which is all about IndexedDB and caching. To get started, there's a little crash course intro to IndexedDB and an accompanying library, [IndexedDB Promised](https://github.com/jakearchibald/idb). The crash course was half theory (for example, why are promises so important that we want to use the library?) and half how-to. I learned the important parts, which are:
+Today, I moved on to the next section of the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html), which is all about IndexedDB and caching. To get started, there's a little crash course intro to IndexedDB and an accompanying library, [IndexedDB Promised](https://github.com/jakearchibald/idb). The crash course was half theory (for example, why are promises so important that we want to use the library?) and half how-to. I learned the important parts, which are:
 * Creating a database with `.open()`
 ```
 var dbPromise = idb.open('test-db', 1, function(upgradeDb) {
@@ -211,18 +211,21 @@ dbPromise.then(function(db) {
 Anyway, I have a fascination with databases and querying them and organizing the data, so even though most students in the course are saying this section is the hardest and most boring, I have a feeling it might be one of my favorite (though definitely still hard). Also, I'm realizing the more I go through this course that I still do not have my head wrapped around promises and callbacks. Actually, I think I have at least somewhat of a handle on callbacks, but promises ... what?!? I've been googling and saving a lot of resources, plus bookmarking other resources shared by students in the program, so I'm going to make it a priority to fully learn and understand promises and callbacks as soon as I finish this course. I don't necessarily have to understand them now to make the code work, but I want to make sure I understand them in the future when I'm writing my own code.
 
 ### Day 9
-Today on the database front, I learned how to successfully transition the content of a website to offline-first. Basically, here's what you want to happen:
+Today on the database front of the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html), I learned how to successfully transition the content of a website to offline-first. Basically, here's what you want to happen:
 
 1. The service worker will fetch the page skeleton and assets from the cache
 2. The browser will get posts from the database
 3. Connect a web socket from the browser to the internet, *completely bypassing the service worker and the cache*, to get updated posts
 4. As new posts arrive, add them to the database for next time
 
-To make all of this work, I first had to create a database store to hold the posts. The posts need to be keyed by their ID and indexed by the time they were created. You can see that solution here: [task-idb-store](https://github.com/karakarakaraff/wittr/commit/7bbf637632d996d2b76dd10dfd02d827b6547d46)
+To make all of this work, I first had to create a database store to hold the posts. The posts need to be keyed by their ID and indexed by the time they were created.
+* [task-idb-store](https://github.com/karakarakaraff/wittr/commit/7bbf637632d996d2b76dd10dfd02d827b6547d46)
 
-Then, I had to tell the browser to get those posts and display them in the correct order. That solution is here: [task-show-stored](https://github.com/karakarakaraff/wittr/commit/c7c04cbc0f876b313f4621f6436ac1a58bbc7551)
+Then, I had to tell the browser to get those posts and display them in the correct order.
+* [task-show-stored](https://github.com/karakarakaraff/wittr/commit/c7c04cbc0f876b313f4621f6436ac1a58bbc7551)
 
-Lastly, now that the browser is storing all these posts, what do you do when there are hundreds, thousands of posts? I was wondering that myself before the course touched on it, so I'm glad this was part of it! Anyway, the instructions said to keep only the latest 30 posts for offline use, so in other words, you need to write logic for the database to keep itself clean. That solution is here: [task-clean-db](https://github.com/karakarakaraff/wittr/commit/b7d0d0c9d22ebadebba8fc35ccab713929d358f9)
+Lastly, now that the browser is storing all these posts, what do you do when there are hundreds, thousands of posts? I was wondering that myself before the course touched on it, so I'm glad this was part of it! Anyway, the instructions said to keep only the latest 30 posts for offline use, so in other words, you need to write logic for the database to keep itself clean.
+* [task-clean-db](https://github.com/karakarakaraff/wittr/commit/b7d0d0c9d22ebadebba8fc35ccab713929d358f9)
 
 Tomorrow, I'll learn the last piece of the puzzle, which is how to store and retrieve images. I'm pretty excited about it!
 
@@ -234,7 +237,7 @@ Udacity encourages students to be active on the forums, so I've been setting asi
 I've found plenty of other resources about promises, but this one really stands out because it's written by the instructor of the course, so I know it will definitely come in handy as I progress through each session. I'm going to make it required reading for myself at some point this week.
 
 ### Day 10
-I finished the offline-first part of the course today. Hurray! I already cached and stored the skeleton of the page and all of the static content, so that just left dealing with image assets. Dealing with images is a bit different than the rest of the site content because the way databases and caches deal with images is different. Basically, if you have to pull an image from a database, you have to wait until the entire image is ready to send. On the other hand, a cache can send the image bit by bit, so you can see on the screen as it loads. Using caches for images is preferable because of the increased performance and the better used experience.
+I finished the offline-first part of the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) today. Hurray! I already cached and stored the skeleton of the page and all of the static content, so that just left dealing with image assets. Dealing with images is a bit different than the rest of the site content because the way databases and caches deal with images is different. Basically, if you have to pull an image from a database, you have to wait until the entire image is ready to send. On the other hand, a cache can send the image bit by bit, so you can see on the screen as it loads. Using caches for images is preferable because of the increased performance and the better used experience.
 * [task-cache-photos](https://github.com/karakarakaraff/wittr/commit/cbe409fb24d8853b9df93d7777fd47743ef4be87)
 
 Additionally, you have to keep in mind that images can take up a lot of space, so you don't want cache more than you need. Just like the database store with posts is set to clean itself, the image cache can clean itself as well. With posts, you keep a certain number. With images, though, there's no set number -- you check the posts to see which images are included, then delete anything that isn't included.
@@ -247,3 +250,17 @@ Since all of the work for the offline-first project was done in a bunch of separ
 * [merged offline-complete](https://github.com/karakarakaraff/wittr/commit/5808a8efda310264f1a1f2648017dc956a4db616)
 
 The second half of the course will be dedicated to learning ES6 and expanding my JavaScript skills. I'm equally excited about this part because I know I can tremendously improve the way I write code. I've been writing and using JavaScript for a little more than a year now, and even though I can typically program things to work and get the outcome I want, I know there's probably a better way to get to that outcome. Coding is a craft, so it's just going to take time, practice and challenging myself to get better.
+
+### Day 11
+Since I'm at a break point on the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html), I decided to go back to my Oregon Trail Alexa skill yet again. I really wanted to clean up the code, especially the gameOver function and the phrases Alexa uses multiple times. I had kind of started this before, but it was a lot of work that required me fitting in little pieces of time here and there between other obligations. Today, I finally finished and merged all of the changes! They can be seen here: [Merge branch 'improvements'](https://github.com/karakarakaraff/alexa-skills/commit/fd54f8e385e4d1eaaa066dc50278a027a16cc88e)
+
+In addition to that, I also experimented a bit with DynamoDB again, picking up where I left off on [day 5](https://github.com/karakarakaraff/100-days-of-code#day-5). I was correct in assuming a lot of the sources I found before were outdated, and now that I've figured it out, it's almost embarrassing how easy it is to add persistence to an Alexa skill via DynamoDB! (Side note: It looks like this is a new feature as of 16 days ago.) However, after getting the database to save all of my session attributes, I ran into a major problem:
+
+1. Start a game.
+2. Quit somewhere halfway through.
+3. Open the game again later, expecting to start a new game via the launch request.
+4. Instead, Alexa returns to whatever previous game play mode I was in before, but handles the launch request as an unhandled intent.
+
+Once again, I found a bunch of resources online and tons of people having the exact same problem. As it turns out, when Alexa persists the session attributes to the database, she also saves the game state there. To complicate things, what the [documentation](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs#skill-state-management) says to do doesn't work, though several people have found workarounds ([here](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs/issues/69) and [here](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs/issues/159)). Based on Amazon's response to this, it seems it's a known issue and they've put in a feature request to simplify it, but until then ... ``¯\_(ツ)_/¯``
+
+I've got the issue under control in testing and have not pushed it to production (never make the same mistake twice!), so hopefully I can figure this out soon enough. However, there is a long, long delay between me setting my session attributes in a game and the database updating -- I'm talking hours. I don't know what the deal is, but it means I'll have to come back to this issue another time.
