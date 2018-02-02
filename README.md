@@ -313,3 +313,111 @@ function createAnimalTradingCardHTML(animal) {
 ```
 
 It's so beautiful! When I finish this course, my next project is to rebuild my portfolio website as a static site so I can host it on [GitHub Pages](https://pages.github.com/) (it's currently a Wordpress site, which you can see here: [karaflaherty.com](http://karaflaherty.com/)). I absolutely CANNOT WAIT to write my HTML fragments like this!
+
+### Day 13
+I finished learning the rest of the ES6 syntax in the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html). This includes:
+* Destructuring arrays
+```
+const point = [10, 25, -34];
+const [x, y, z] = point;
+console.log(x, y, z);
+>> 10 25 -34
+```
+* Destructuring objects
+```
+const gemstone = {
+  type: 'quartz',
+  color: 'rose',
+  karat: 21.29
+};
+
+const {type, color, karat} = gemstone;
+
+console.log(type, color, karat);
+>> quartz rose 21.29
+```
+* Object literal shorthand
+```
+let type = 'quartz';
+let color = 'rose';
+let carat = 21.29;
+
+const gemstone = { type, color, carat };
+```
+* Shorthand for methods within objects
+```
+let gemstone = {
+  type,
+  color,
+  carat,
+  calculateWorth() { ... }
+};
+```
+* The for...of loop, which eliminates the need for counting logic, exit conditions and indexes that other for loops require
+```
+const digits = [0, 1, 2, 3];
+
+for (const digit of digits) {
+  console.log(digit);
+}
+>> 0
+>> 1
+>> 2
+>> 3
+```
+* The `continue` option that can be used to stop or break a for...of loop at any time
+```
+const digits = [0, 1, 2, 3, 4, 5];
+
+for (const digit of digits) {
+  if (digit % 2 === 0) {
+    continue;
+  }
+  console.log(digit);
+}
+>> 1
+>> 3
+>> 5
+```
+* The spread operator (`...`), which is used to expand, or spread, iterable objects into multiple elements
+```
+const books = ["Don Quixote", "The Hobbit", "Alice in Wonderland", "Tale of Two Cities"];
+console.log(...books);
+>> Don Quixote The Hobbit Alice in Wonderland Tale of Two Cities
+```
+* Combining arrays with the spread operator
+```
+const fruits = ["apples", "bananas", "pears"];
+const vegetables = ["corn", "potatoes", "carrots"];
+
+const produce = [...fruits, ...vegetables];
+
+console.log(produce);
+>> ["apples", "bananas", "pears", "corn", "potatoes", "carrots"]
+```
+* The rest parameter (also `...`), which is used to bundle multiple elements back into an array
+```
+const order = [20.17, 18.67, 1.50, "cheese", "eggs", "milk", "bread"];
+const [total, subtotal, tax, ...items] = order;
+console.log(total, subtotal, tax, items);
+>> 20.17 18.67 1.5 ["cheese", "eggs", "milk", "bread"]
+```
+* Using the rest parameter with functions that can take an indefinite number of arguments (aka variadic functions)
+```
+function sum(...nums) {
+  let total = 0;  
+  for(const num of nums) {
+    total += num;
+  }
+  return total;
+}
+
+sum(1, 2);
+>> 3
+sum(10, 36, 7, 84, 90, 110);
+>> 337
+sum(-23, 3000, 575000);
+>> 577977
+```
+
+My takeaway from ES6 is that it makes everything much more simple and concise. Last year, I learned JavaScript (non-ES6) first, then I learned Ruby, and I was totally blown away by how simple Ruby is! I hadn't considered the idea that JavaScript could be transformed to be easier to write, read and understand. In fact, although I don't know Perl or Python, I read that some of these new updates in ES6 (like destructuring) were modeled after those languages. Over all, it's really interesting to see how programming languages can grow and adapt.
