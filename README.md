@@ -421,3 +421,22 @@ sum(-23, 3000, 575000);
 ```
 
 My takeaway from ES6 is that it makes everything much more simple and concise. Last year, I learned JavaScript (non-ES6) first, then I learned Ruby, and I was totally blown away by how simple Ruby is! I hadn't considered the idea that JavaScript could be transformed to be easier to write, read and understand. In fact, although I don't know Perl or Python, I read that some of these new updates in ES6 (like destructuring) were modeled after those languages. Over all, it's really interesting to see how programming languages can grow and adapt.
+
+### Day 14
+The next section of the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) is all about functions in ES6. Instead of diving right in, I went over each part of the section and did some of my own reading on the topics that will be covered:
+* Arrow functions (I'm especially looking forward to this!)
+  * [MDN: arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+  * [freeCodeCamp: JavaScript ES6 Functions: The Good Parts](https://medium.freecodecamp.org/es6-functions-9f61c72b1e86)
+  * [Wes Bos: JavaScript Arrow Functions Introduction](http://wesbos.com/arrow-functions/)
+  * [Sitepoint: ES6 Arrow Functions: The New Fat & Concise Syntax in JavaScript](https://www.sitepoint.com/es6-arrow-functions-new-fat-concise-syntax-javascript/)
+  * [codeburst: JavaScript: Arrow Functions for Beginners](https://codeburst.io/javascript-arrow-functions-for-beginners-926947fc0cdc)
+* The addition of default function parameters
+  * [MDN: default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+  * [Sitepoint: ES6 Default Parameters](https://www.sitepoint.com/es6-default-parameters/)
+* The `class` keyword, which can be used to create functions *as* classes
+  * [Fun Fun Function: Class keyword in JavaScript](https://medium.com/humans-create-software/class-keyword-in-javascript-f46f2e0b68d6)
+* The `super` and `extends` keywords, which connect different classes together
+  * [MDN: super](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
+  * [MDN: extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
+
+I learned about classes when I first learned JavaScript, and although I understand them academically, I've never actually used them, so I don't know them from a production standpoint. In addition to learning arrow functions, I'm really looking forward to getting a refresher on classes, which will force me to consider how I can use them in a project.
