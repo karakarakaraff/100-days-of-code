@@ -440,3 +440,10 @@ The next section of the [Google Scholars/Udacity intermediate mobile web develop
   * [MDN: extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
 
 I learned about classes when I first learned JavaScript, and although I understand them academically, I've never actually used them, so I don't know them from a production standpoint. In addition to learning arrow functions, I'm really looking forward to getting a refresher on classes, which will force me to consider how I can use them in a project.
+
+### Day 15
+Today's code time is dedicated to meeting with others who are doing #100DaysOfCode! When I interviewed for my current job at the newspaper, I was honest and let them know that I had enrolled in a coding bootcamp and would probably only be there for a year. Lucky for me, my boss hired me anyway! However, he eventually ended up leaving to go to a coding bootcamp as well, and then another coworker also recently left to attend a coding bootcamp. All three of us are taking slightly different routes, but we have the same goal in mind: finding a job that lets us put our coding skills to work everyday and that actually pays a living wage, thus adding a layer of financial freedom and work-life balance where it's currently missing.
+
+Anyway, because we've all talked about coding at work, other coworkers have also expressed their interest in learning to code, and I feel a lot of camaraderie with these people because *I was once there, too.* I had been planning to do #100DaysOfCode as soon as I finished my bootcamp curriculum, and to build upon the momentum, I asked everyone if they'd like to join me -- to my delight, they said yes! We're all at different stages and skill levels, which makes it even more fun because that means we can all learn from each other.
+
+Every Sunday, we're going to meet one hour before work to grab coffee and talk about our progress, our struggles, our questions, etc. Today's the first Sunday we could meet, and we're all on day 15, so I know we'll have lots to cover. Go team!
