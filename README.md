@@ -447,3 +447,73 @@ Today's code time is dedicated to meeting with others who are doing #100DaysOfCo
 Anyway, because we've all talked about coding at work, other coworkers have also expressed their interest in learning to code, and I feel a lot of camaraderie with these people because *I was once there, too.* I had been planning to do #100DaysOfCode as soon as I finished my bootcamp curriculum, and to build upon the momentum, I asked everyone if they'd like to join me -- to my delight, they said yes! We're all at different stages and skill levels, which makes it even more fun because that means we can all learn from each other.
 
 Every Sunday, we're going to meet one hour before work to grab coffee and talk about our progress, our struggles, our questions, etc. Today's the first Sunday we could meet, and we're all on day 15, so I know we'll have lots to cover. Go team!
+
+### Day 16
+Finally, on to arrow functions! First and foremost, on day 12, I had a question regarding how ES6 handles function expressions, and I was left with a hunch that arrow functions would have something to do with it, which was confirmed today. As it turns out, **arrow functions are always expressions.** In fact, their full name is "arrow function expressions," so they can only be used where an expression is valid. This includes being:
+
+1. stored in a variable
+2. passed as an argument to a function
+3. stored in an object's property
+
+Generally speaking, arrow functions are pretty simple. Here's an example of two pieces of code doing the exact same thing:
+```
+const upperizedNames = ['Farrin', 'Kagure', 'Asser'].map(function(name) {
+  return name.toUpperCase();
+});
+
+const upperizedNames = ['Farrin', 'Kagure', 'Asser'].map(
+  name => name.toUpperCase()
+);
+```
+
+The first function is a standard JavaScript function, while the second function is an arrow function, which you can see uses an arrow (`=>`). By adding the arrow, you can remove a ton of other pieces from the function, thus making it more concise and easy to read/write. Here are the steps:
+1. remove the function keyword
+2. remove the parentheses
+3. remove the opening and closing curly braces
+4. remove the return keyword
+5. remove the semicolon
+6. add an arrow (`=>`) between the parameter list and the function body
+
+Of course, it's not always that easy, and depending on how the function is expressed, the look of an arrow function might change a bit.
+
+##### ARROW FUNCTION STORED IN A VARIABLE
+```
+const greet = name => `Hello, ${name}!`;
+greet('Kara');
+>> Hello, Kara!
+```
+
+##### ARROW FUNCTION WITH MORE THAN ONE PARAMETER OR ZERO PARAMETERS
+This will require wrapping the parameters (even zero parameters) in parenthesis.
+
+Zero parameters:
+```
+const greet = () => 'Hello, human!';
+greet();
+>> Hello, human!
+```
+
+Multiple parameters:
+```
+const greet = (greeting, name) => `${greeting}, ${name}!`;
+greet('Hey', 'Kara');
+>> Hey, Kara!
+```
+
+##### ARROW FUNCTIONS AND BLOCK BODY SYNTAX
+You'd need to use block body syntax if your arrow function requires more than one line of code. These require curly braces to wrap the function body, and you need to add a return statement to actually return something from the function.
+```
+const upperizedNames = ['Kara', 'Morgan', 'Cameron'].map( name => {
+  name = name.toUpperCase();
+  return `${name} has ${name.length} characters in their name`;
+});
+>> KARA has 4 characters in their name.
+>> MORGAN has 6 characters in their name.
+>> CAMERON has 7 characters in their name.
+```
+
+The arrow function also had an entire section dedicated to `this`, but my notes are sooooooo long, I'm not going to go through them all here. Instead, here's the key takeaway: **With standard functions, `this` is a dynamic value that’s different depending on how a function is called. But with arrow functions, the value of `this` depends on the where the function is located in the code.**
+
+It can get quite complicated, but here are some resources to help explain `this` in both standard functions and arrow functions:
+* [You Don't Know JS: this All Makes Sense Now!](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md)
+* [freeCodeCamp: Learn ES6 The Dope Way Part II: Arrow functions and the ‘this’ keyword](https://medium.freecodecamp.org/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881)
