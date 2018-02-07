@@ -46,7 +46,7 @@ I could ensure it was working by checking the JSON:
 Overall, it was a very painful learning experience and even cost me a 1-star review on my skill. However, now that the skill is going through certification testing again and will likely be back into production tomorrow, I'm feeling confident that the potential good reviews will outweigh the bad one. I've also walked away from this knowing that I have what it takes to debug and quickly take action. **The biggest takeaway today wasn't necessarily any specific coding knowledge, but instead, it was how to react to a bug in production.** I'm glad today is over!
 
 ### Day 4
-I got to leave Alexa to the  certification process, so I'm back with my [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html). I left off on day 2 with an intro to service workers, and I continued that today by learning how to completely handle a browser request with a service worker, all without ever touching the network. It's actually pretty simple! Inside the service worker itself, you can write a chunk of code like this:
+I got to leave Alexa to the  certification process, so I'm back with my [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html). I left off on [day 2](https://github.com/karakarakaraff/100-days-of-code#day-2) with an intro to service workers, and I continued that today by learning how to completely handle a browser request with a service worker, all without ever touching the network. It's actually pretty simple! Inside the service worker itself, you can write a chunk of code like this:
 
 ```
 self.addEventListener('fetch', function(event) {
@@ -449,7 +449,7 @@ Anyway, because we've all talked about coding at work, other coworkers have also
 Every Sunday, we're going to meet one hour before work to grab coffee and talk about our progress, our struggles, our questions, etc. Today's the first Sunday we could meet, and we're all on day 15, so I know we'll have lots to cover. Go team!
 
 ### Day 16
-Finally, on to arrow functions! First and foremost, on day 12, I had a question regarding how ES6 handles function expressions, and I was left with a hunch that arrow functions would have something to do with it, which was confirmed today. As it turns out, **arrow functions are always expressions.** In fact, their full name is "arrow function expressions," so they can only be used where an expression is valid. This includes being:
+In the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html), I'm finally on to arrow functions! First and foremost, on [day 12](https://github.com/karakarakaraff/100-days-of-code#day-12), I had a question regarding how ES6 handles function expressions, and I was left with a hunch that arrow functions would have something to do with it, which was confirmed today. As it turns out, **arrow functions are always expressions.** In fact, their full name is "arrow function expressions," so they can only be used where an expression is valid. This includes being:
 
 1. stored in a variable
 2. passed as an argument to a function
@@ -517,3 +517,64 @@ The arrow function also had an entire section dedicated to `this`, but my notes 
 It can get quite complicated, but here are some resources to help explain `this` in both standard functions and arrow functions:
 * [You Don't Know JS: this All Makes Sense Now!](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md)
 * [freeCodeCamp: Learn ES6 The Dope Way Part II: Arrow functions and the ‘this’ keyword](https://medium.freecodecamp.org/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881)
+
+### Day 17
+The [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) moved from arrow functions and into default function parameters. Defaults are useful because you can call a function without any parameters, and it will still work by giving you the default output. Here's an idea of how default function parameters would look before ES6:
+
+```
+function greet(name, greeting) {
+  name = (typeof name !== 'undefined') ?  name : 'Student';
+  greeting = (typeof greeting !== 'undefined') ?  greeting : 'Welcome';
+
+  return `${greeting}, ${name}!`;
+}
+
+>> greet(); // Welcome, Student!
+>> greet('James'); // Welcome, James!
+>> greet('Richard', 'Howdy'); // Howdy, Richard!
+```
+
+As you can see, you'd set those defaults inside the function logic. It works, sure, but it's not the most beautiful or concise way to achieve default parameter functionality. Now, take a look at the same function with ES6:
+
+```
+function greet(name = 'Student', greeting = 'Welcome') {
+  return `${greeting}, ${name}!`;
+}
+
+greet(); // Welcome, Student!
+greet('James'); // Welcome, James!
+greet('Richard', 'Howdy'); // Howdy, Richard!
+```
+
+This takes the default parameters out of the function logic and places them in the actual parameters themselves, *which makes so much sense.* And look how easy it is to read and understand! The other benefit to using default parameters the ES6 way is that you can combine it with destructuring via arrays and objects (see [day 13](https://github.com/karakarakaraff/100-days-of-code#day-17)).
+
+##### DEFAULTS AND DESTRUCTURING ARRAYS
+```
+function createGrid([width = 5, height = 5] = []) {
+  return `Generates a ${width} x ${height} grid`;
+}
+
+>> createGrid(); // Generates a 5 x 5 grid
+>> createGrid([]); // Generates a 5 x 5 grid
+>> createGrid([2]); // Generates a 2 x 5 grid
+>> createGrid([2, 3]); // Generates a 2 x 3 grid
+>> createGrid([undefined, 3]); // Generates a 5 x 3 grid
+```
+
+##### DEFAULTS AND DESTRUCTURING OBJECTS
+```
+function createSundae({scoops = 1, toppings = ['Hot Fudge']} = {}) {
+  const scoopText = scoops === 1 ? 'scoop' : 'scoops';
+  return `Your sundae has ${scoops} ${scoopText} with ${toppings.join(' and ')} toppings.`;
+}
+
+>> createSundae(); // Your sundae has 1 scoop with Hot Fudge toppings.
+>> createSundae({}); // Your sundae has 1 scoop with Hot Fudge toppings.
+>> createSundae({scoops: 2}); // Your sundae has 2 scoops with Hot Fudge toppings.
+>> createSundae({scoops: 2, toppings: ['Sprinkles']}); // Your sundae has 2 scoops with Sprinkles toppings.
+>> createSundae({toppings: ['Cookie Dough', 'Caramel', 'Cherry']}); // Your sundae has 1 scoop with Cookie Dough and Caramel and Cherry toppings.
+```
+
+The key to both functions above is also in the parameters, and it's the `= []` and `= {}` pieces. Without those, calling a simple `createGrid()` or `createSundae()` would throw an error because each function expects an array or object, respectively, to be called included in the argument, but since there's no argument at all, the function breaks. However, by including `= []`/`= {}`, it tells the function that if no argument is included, then the function can use an empty array/object as the default.
+
+*NOTE: Since arrays are positionally based, you'd have to pass undefined to "skip" over the first argument (and accept the default) to get to the second argument, like this: `createSundae([undefined, ['Hot Fudge', 'Sprinkles', 'Caramel’]]);`. Unless you've got a strong reason to use array defaults with array destructuring, it is highly recommend go with object defaults and object destructuring instead!*
