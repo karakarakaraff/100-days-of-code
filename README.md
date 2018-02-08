@@ -541,9 +541,9 @@ function greet(name = 'Student', greeting = 'Welcome') {
   return `${greeting}, ${name}!`;
 }
 
-greet(); // Welcome, Student!
-greet('James'); // Welcome, James!
-greet('Richard', 'Howdy'); // Howdy, Richard!
+>> greet(); // Welcome, Student!
+>> greet('James'); // Welcome, James!
+>> greet('Richard', 'Howdy'); // Howdy, Richard!
 ```
 
 This takes the default parameters out of the function logic and places them in the actual parameters themselves, *which makes so much sense.* And look how easy it is to read and understand! The other benefit to using default parameters the ES6 way is that you can combine it with destructuring via arrays and objects (see [day 13](https://github.com/karakarakaraff/100-days-of-code#day-17)).
@@ -578,3 +578,37 @@ function createSundae({scoops = 1, toppings = ['Hot Fudge']} = {}) {
 The key to both functions above is also in the parameters, and it's the `= []` and `= {}` pieces. Without those, calling a simple `createGrid()` or `createSundae()` would throw an error because each function expects an array or object, respectively, to be called included in the argument, but since there's no argument at all, the function breaks. However, by including `= []`/`= {}`, it tells the function that if no argument is included, then the function can use an empty array/object as the default.
 
 *NOTE: Since arrays are positionally based, you'd have to pass undefined to "skip" over the first argument (and accept the default) to get to the second argument, like this: `createSundae([undefined, ['Hot Fudge', 'Sprinkles', 'Caramel’]]);`. Unless you've got a strong reason to use array defaults with array destructuring, it is highly recommend go with object defaults and object destructuring instead!*
+
+### Day 18
+Today's hour of code was spent putting out yet another Alexa fire, this time with my Stranger Things Trivia skill. Some things to know:
+1. I built this skill with Amazon's own official trivia skill sample
+2. It has already undergone extensive testing and passed certification
+3. It has been live for nearly three months
+
+And yet I got an email from Amazon this morning saying that I need to take immediate action because "your skill endpoint does not consistently return a valid response to user requests." No hint at what the error might be that they found, just that there's at least one error somewhere. In addition to being vague, the message said that if I do not take action within five days, they'll suppress my skill. Nooooooo!
+
+Long story short, I went back through the previous 48 hours of Cloudwatch logs connected to Stranger Things Trivia and took note of any errors that I found. To my relief, the errors were few and far between, but I did notice that it was the same error over and over again, just in two different ways:
+
+`TypeError: Cannot assign to read only property '144' of string 'QUESTIONS.45.In season two, Eleven's mom mumbles several things in a loop. What is <emphasis level="strong">not</emphasis> included in that loop?'`
+
+`TypeError: Cannot assign to read only property '44' of string 'QUESTIONS.4.What is Dr. Brenner's first name?'`
+
+In action, whenever the game would pull one of these two questions, it would play just fine until the user got to this question, then error out and quit completely. Nothing in my code had changed since the skill went live, and those questions had worked just fine in the past, so what went wrong?
+
+This is an error I have never seen before in my life, and as much as I traced it through my code, I had no idea what was causing it or why. A thorough search on the Amazon Developer forums turned up nothing, and a Google search sent me on a bit of a wild goose chase but did not result in finding any answers specific to Node.js-based Alexa skills.
+
+Finally, it occurred to me that I should check the issues on the [official trivia skill sample repo](https://github.com/alexa/skill-sample-nodejs-trivia). I've personally worked with this repo and even submitted a pull request to fix several of the errors I previously ran into, so I knew people were active on there. And sure enough, I was not alone!
+
+Here's issue 39: ["errorMessage": "Cannot assign to read only property '74' of string 'QUESTIONS.1.The 1964 classic Rudolph The Red Nosed Reindeer was filmed in.'"](https://github.com/alexa/skill-sample-nodejs-trivia/issues/39)
+
+And inside that issue is a link to someone else who had the same problem in issue 14: ["errorMessage": "Cannot assign to read only property"](https://github.com/alexa/skill-sample-nodejs-trivia/issues/14)
+
+And, finally, right there in issue 14 is [this answer by mikeybyker](https://github.com/alexa/skill-sample-nodejs-trivia/issues/14#issuecomment-312594753):
+
+> "The problem you are seeing there is down to the translation/i18n library messing up the questions. ... TL;DR change to something like:
+
+`var translatedQuestions = this.t("QUESTIONS", {keySeparator: '#'});`
+
+The fix is in adding `{keySeparator: '#'}`, simple as that. You can see that change in action on my own commit here: [Fixed errors with translation/i18n library](https://github.com/karakarakaraff/alexa-skills/commit/32a9f91ed88362540059ae02a8ce670949641a79)
+
+Now here's the thing: I still don't know what happened to make my skill suddenly have these errors where they didn't exist before. Additionally, I have no idea what the translation/i18n library is or how the keySeparator comes into play. What I *do* know is that this fixed all the problems, and my skill is back to being error-free (for now, maybe?). This was definitely a lesson in being able to hunt down an answer and put a fix into production regardless of fully understanding the ins and outs, which is just as valuable as any other lesson. Now, if only Amazon would fix this in their code and merge [my **approved** pull request](https://github.com/alexa/skill-sample-nodejs-trivia/pulls) (and the pull requests of others), then we'd stop seeing the same issues showing up over and over in Alexa trivia skills.
