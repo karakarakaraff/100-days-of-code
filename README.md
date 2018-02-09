@@ -612,3 +612,23 @@ And, finally, right there in issue 14 is [this answer by mikeybyker](https://git
 The fix is in adding `{keySeparator: '#'}`, simple as that. You can see that change in action on my own commit here: [Fixed errors with translation/i18n library](https://github.com/karakarakaraff/alexa-skills/commit/32a9f91ed88362540059ae02a8ce670949641a79)
 
 Now here's the thing: I still don't know what happened to make my skill suddenly have these errors where they didn't exist before. Additionally, I have no idea what the translation/i18n library is or how the keySeparator comes into play. What I *do* know is that this fixed all the problems, and my skill is back to being error-free (for now, maybe?). This was definitely a lesson in being able to hunt down an answer and put a fix into production regardless of fully understanding the ins and outs, which is just as valuable as any other lesson. Now, if only Amazon would fix this in their code and merge [my **approved** pull request](https://github.com/alexa/skill-sample-nodejs-trivia/pulls) (and the pull requests of others), then we'd stop seeing the same issues showing up over and over in Alexa trivia skills.
+
+### Day 19
+Today's hour will be dedicated not necessarily to code but instead to a Women In Tech meetup. This particular meetup is held once every quarter, and the last one was my first big networking meetup ever! I connected with some really awesome women who have since offered a lot of advice and encouragement as I embark on my career change into the tech industry, plus I got a much-needed boost of confidence by listening to successful women explain how they got into tech. It made me realize that, because tech is such a relatively new and booming industry, there is no one right way to get your foot in the door.
+
+Here's the description for this quarter's focus:
+
+> The focus of this quarter’s gathering will be on how to land your next job. We will talk through resumes, interviewing skills, networking tips, and ways to build your personal brand. We want to encourage you to be bold, own a confident mindset, and apply to that next role, reach out for a coffee date, and work towards your most ambitious career goals.
+
+The reason I'm including this in my 100 Days of Code challenge is because one of my goals of this challenge is to get a job before the end of the 100 days. With each networking event, each hour spent coding, each Sunday meetup with my fellow 100-dayers, I feel more and more confident that I'll achieve every goal on my list.
+
+Btw, I haven't included that goal list anywhere else in this log, so I'll stick it here:
+1. Complete the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html)
+2. Rebuild my Wordpress portfolio website as a static website and host it on GitHub Pages
+3. Rebuild my BFF's Wordpress photography website as a static website and host it on GitHub Pages
+4. Apply, interview, network -- make that career change!
+5. If there's extra time, do one or more of the following:
+  * Daily JavaScript challenges on CodeWars
+  * Rebuild one of my Bloc projects with React (previously built in Angular)
+  * Go through the Node.js and Express.js lessons on freeCodeCamp
+  * Take the Harvard CS50 Intro to Computer Science course on EdX
