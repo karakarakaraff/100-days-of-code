@@ -632,3 +632,72 @@ Btw, I haven't included that goal list anywhere else in this log, so I'll stick 
   * Rebuild one of my Bloc projects with React (previously built in Angular)
   * Go through the Node.js and Express.js lessons on freeCodeCamp
   * Take the Harvard CS50 Intro to Computer Science course on EdX
+
+### Day 20
+Back to the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) and ES6! Today I learned all about how ES6 handles classes.
+
+*NOTE:* In other languages, **classes** are used to create objects and provide inheritance. However, JavaScript is NOT a class-based language, so it uses **functions** to create objects, and it links objects together (so they can inherit data and functionality) through prototypal inheritance. The addition of keywords like `class`, `super` and `extends` in ES6 does NOT change the underlying functionality of JavaScript.
+
+Here's what a class looks like pre-ES6:
+```
+// create the class
+function Plane(numEngines) {
+  this.numEngines = numEngines;
+  this.enginesActive = false;
+}
+
+// methods "inherited" by all instances
+Plane.prototype.startEngines = function () {
+  console.log('starting engines...');
+  this.enginesActive = true;
+};
+
+const bigPlane = new Plane(4);
+bigPlane.startEngines();
+```
+
+And here's what a class looks like post-ES6:
+```
+class Plane {
+  // create the class
+  constructor(numEngines) {
+    this.numEngines = numEngines;
+    this.enginesActive = false;
+  }
+
+  // methods "inherited" by all instances
+  startEngines() {
+    console.log('starting engines…');
+    this.enginesActive = true;
+  }
+}
+
+const bigPlane = new Plane(4);
+bigPlane.startEngines();
+```
+
+Generally speaking, the steps for converting a class from ES5 to ES6 goes like this:
+1. First, write a function using the `class` keyword.
+2. Everything inside the ES5 constructor function is placed inside a method with the name `constructor`, which is placed inside the `class` function. **This constructor method will automatically run when a new object is constructed from this class.** If any data is needed to create the object, it needs to be included as an argument to `constructor()`.
+3. All of the methods from the ES5 prototype function are placed inside the `class` as well, keeping everything in one nice, simple package.
+
+In addition to classes, I also learned about static methods, subclasses, and the `super` and `extends` keywords. I have tons of notes on those that I won't copy here, but I will make note of the overall pros and cons to using classes in JavaScript:
+
+**Benefits of classes**
+1. Less setup: There's a lot less code that you need to write to create a function
+2. Clearly defined constructor function: Inside the class definition, you can clearly specify the constructor function.
+3. Everything's contained: All code that's needed for the class is contained in the class declaration. Instead of having the constructor function in one place, then adding methods to the prototype one-by-one, you can do everything all at once!
+
+**Things to look out for when using classes**
+1. `class` is not magic: The class keyword brings with it a lot of mental constructs from other, class-based languages. It doesn't magically add this functionality to JavaScript classes.
+2. `class` is a mirage over prototypal inheritance: Under the hood, a JavaScript class just uses prototypal inheritance, the same as always.
+3. Using classes requires the use of `new`: When creating a new instance of a JavaScript class, **the new keyword must be used.** For example,
+```
+class Toy {
+   ...
+}
+
+const myToy1 = new Toy();
+```
+
+My thoughts on classes are that I've still never actually used them (I'm pretty sure of that, anyway), but I can totally see how and why they would be used. Also, I did some reading specifically on ES6 static methods within classes, and I found a few discussions linking static methods, and thus classes, with React. This is exciting, especially because building a full web app from scratch using React is on my to-do list, so that means I'll finally have a real reason for using JavaScript classes!
