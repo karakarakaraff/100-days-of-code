@@ -701,3 +701,91 @@ const myToy1 = new Toy();
 ```
 
 My thoughts on classes are that I've still never actually used them (I'm pretty sure of that, anyway), but I can totally see how and why they would be used. Also, I did some reading specifically on ES6 static methods within classes, and I found a few discussions linking static methods, and thus classes, with React. This is exciting, especially because building a full web app from scratch using React is on my to-do list, so that means I'll finally have a real reason for using JavaScript classes!
+
+### Day 21
+More of the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) and ES6! It looks like I'll be here for about another week, then I'll have the course finished. Woo hoo!
+
+Anyway, I moved into the lesson on ES6 built-ins. This is going to include symbols, sets, maps, promises, proxies and generators. The two things I'm most excited about are symbols and promises, just because I've come across them in the wild and have had very little understanding of them up to this point. However, I can now say that symbols are in my knowledge base because that's what I studied today.
+
+Some notes on symbols:
+
+Symbols are a **new primitive data** type available to us in JavaScript. A symbol is a unique and immutable data type that is often used to identify object properties.
+
+**Why use symbols?** Image there’s an empty bowl. You put an apple, an orange and a banana in the bowl. Identifying which fruit is the apple, which is the orange, which is the banana is simple. But now, you put a second banana in the bowl. If your program requests a banana from the bowl, how is it supposed to know which banana? You could identify the bananas as `banana1` and `banana2`, but what happens if you add more bananas to the bowl? Is it really a good idea to have `banana10493041984`? With the addition of symbols in ES6, there is a solution for this problem.
+
+To create a symbol, you write `Symbol()` with an optional string as its description.
+
+```
+const sym1 = Symbol('apple');
+console.log(sym1);
+Symbol(apple)
+```
+
+This will create a unique symbol and store it in `sym1`. The description `"apple"` is just a way to describe the symbol, but it can’t be used to access the symbol itself.
+
+To drive home how this works, if you compare two symbols with the same description ...
+
+```
+const sym2 = Symbol('banana');
+const sym3 = Symbol('banana');
+console.log(sym2 === sym3);
+>> false
+```
+
+... then the result is **false** because *the description is only used to describe the symbol.* It’s not used as part of the symbol itself — each time, a new symbol is created regardless of the description.
+
+Going back to the fruit bowl you previously imagined, here’s the code to represent that bowl and the fruit:
+
+```
+const bowl = {
+  'apple': { color: 'red', weight: 136.078 },
+  'banana': { color: 'yellow', weight: 183.15 },
+  'orange': { color: 'orange', weight: 170.097 }
+};
+```
+
+The bowl contains fruit, which are objects that are properties of the bowl. But, we run into a problem when the second banana gets added.
+
+```
+const bowl = {
+  'apple': { color: 'red', weight: 136.078 },
+  'banana': { color: 'yellow', weight: 183.151 },
+  'orange': { color: 'orange', weight: 170.097 },
+  'banana': { color: 'yellow', weight: 176.845 }
+};
+
+console.log(bowl);
+>> Object {apple: Object, banana: Object, orange: Object}
+```
+
+Instead of adding another banana to the bowl, our previous banana is overwritten by the new banana being added to the bowl. To fix this problem, we can use symbols.
+
+```
+const bowl = {
+  [Symbol('apple')]: { color: 'red', weight: 136.078 },
+  [Symbol('banana')]: { color: 'yellow', weight: 183.15 },
+  [Symbol('orange')]: { color: 'orange', weight: 170.097 },
+  [Symbol('banana')]: { color: 'yellow', weight: 176.845 }
+};
+
+console.log(bowl);
+>> Object {Symbol(apple): Object, Symbol(banana): Object, Symbol(orange): Object, Symbol(banana): Object}
+```
+
+**By changing the bowl’s properties to use symbols, each property is a unique Symbol and the first banana doesn’t get overwritten by the second banana.**
+
+My thoughts on this are that symbols help make the code more readable to humans and cause it to act more like a real-world situation. When you're working with a bunch of data, you want to be able to access/read/parse/interpret/etc. that data in all different kinds of ways, and adding symbols to the mix gives you one more way to do so.
+
+A couple other things that were packaged in the lesson on symbols were the iterable protocol and the iterator protocol, which use `[Symbol.iterator]` and `.next()`. These explain another use case for symbols, but the subject was kind of glossed over, so I'll have to some more reading on it. Here's an example, though:
+
+```
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const arrayIterator = digits[Symbol.iterator]();
+
+console.log(arrayIterator.next());
+console.log(arrayIterator.next());
+console.log(arrayIterator.next());
+>> Object {value: 0, done: false}
+>> Object {value: 1, done: false}
+>> Object {value: 2, done: false}
+```
