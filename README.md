@@ -789,3 +789,10 @@ console.log(arrayIterator.next());
 >> Object {value: 1, done: false}
 >> Object {value: 2, done: false}
 ```
+
+### Day 22
+Today's hour will be dedicated to meeting up with my fellow #100DaysOfCode challengers (same as [day 15](https://github.com/karakarakaraff/100-days-of-code#day-15)). I'm excited because more people can make it this week, plus everyone has made a ton of progress in just the last week, so we can all see and share that progress. One thing I know for sure that we'll be covering is publishing our projects with GitHub Pages. I didn't even know you could publish multiple projects via GitHub Pages until it came up in coding conversation throughout the week -- I just knew about using GitHub Pages for portfolio sites named after your username, which limits you to publishing only one project -- so making it work and seeing it in action will be cool. I only have one static site project in my repository right now, which is being hosted on Netlify, and although Netlify is fantastic, I'd like to publish my project through GitHub just to keep everything together.
+
+Another thing I'm sure we'll talk about today is the career change aspect. We all have the goal of moving out of the newspaper industry and into the tech industry, so I think it would be great to brainstorm how the skills we all have now can translate to other industries, thus setting us apart from other applicants. Of course, not everyone is at the application stage yet, but one way to get there is through a bootcamp, so we'll talk about that, too. Of everyone in the challenge, three of us have gone to three different bootcamps, so we bring a wealth of knowledge and experience about our prospective bootcamps. I hope that's really helpful for the others as they decide if/when they want to commit to a bootcamp.
+
+Overall, I'm just excited to get together with others to talk code and share encouragement. And to drink a fancy chai tea latte!
