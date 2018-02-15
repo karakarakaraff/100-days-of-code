@@ -824,4 +824,92 @@ Something slightly related: I love checking the analytics on my website, so ever
 
 Anyway, just some thoughts on web development and the end result, which is people accessing information. My goal: to make sure that information is complete, easy to find, user friendly and well presented.
 
-If you're interested in checking out my website, you can see it here: [karaflaherty.com](http://karaflaherty.com/)
+If you're interested in checking out my website, you can see it here: [karaflaherty.com](http://karaflaherty.com)
+
+### Day 26
+Well, it's been a few days, but I'm back to the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) and more ES6! Today was all about Sets and WeakSets. Basically, the way it was explained is that a Set in JavaScript is meant to be similar to a set in mathematics, which is a collection of distinct items. For example, `{2, 4, 5, 6}` is a set because each number is unique and appears only once. However, `{1, 1, 2, 4}` is not a set because it contains duplicate entries.
+
+Arrays can be similar to sets except that they don't force the items within to be unique. Sure, you can do all kinds of methods on arrays to eventually pare them down by removing the duplicates, but Sets make it a bit easier. However, as always, there are some things to keep in mind:
+* Sets are not indexed-based -- you do not refer to items in a set based on their position in the set
+* items in a Set can’t be accessed individually
+
+##### Create a set
+This will create an empty set:
+```
+const games = new Set();
+console.log(games);
+>> Set {}
+```
+
+This will create a set from a list of values:
+```
+const games = new Set(['Super Mario Bros.', 'Banjo-Kazooie', 'Mario Kart', 'Super Mario Bros.']);
+console.log(games);
+>> Set {'Super Mario Bros.', 'Banjo-Kazooie', 'Mario Kart'}
+```
+*NOTE: You can see in the example that 'Super Mario Bros.' is added twice from the list of values, but the set automatically removes the duplicate.*
+
+##### Modify a set
+You can use the `.add()`, `.delete()` and `.clear()` methods. Using the `games` Set from previous examples:
+```
+games.add('Banjo-Tooie');
+games.add('Age of Empires');
+games.delete('Super Mario Bros.');
+console.log(games);
+>> Set {'Banjo-Kazooie', 'Mario Kart', 'Banjo-Tooie', 'Age of Empires'}
+```
+
+```
+games.clear()
+console.log(games);
+>> Set {}
+```
+
+##### Check the length of a set
+Use the `.size()` method:
+```
+const monthsOfTheYear = new Set(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+console.log(monthsOfTheYear.size);
+>> 12
+```
+*NOTE: You don't use `.length()` because that is reserved for items that can be indexed, like an array.*
+
+##### Check if an item exists
+Use the `.has()` method. Using the `month` Set from the previous example:
+```
+console.log(monthsOfTheYear.has('September'));
+>> true
+```
+
+##### Retrieve all values and create a SetIterator object
+Use can use the `.values()` method to access all of the values in a Set. What's more, this returns a SetIterator object, and if you save it to a variable, you can loop through the values. Again, using the `month` Set from the previous example:
+```
+console.log(monthsOfTheYear.values());
+>> SetIterator {'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'}
+```
+
+Using the default iterator:
+```
+const months = monthsOfTheYear.values();
+months.next();
+>> Object {value: 'January', done: false}
+months.next();
+>> Object {value: 'February', done: false}
+```
+
+Using a `for...of` loop:
+```
+const months = monthsOfTheYear.values();
+for (const month of months) {
+  console.log(month);
+}
+>> January
+>> February
+>> March
+>> (and so on ...)
+```
+
+##### WeakSets
+As for WeakSets, they work a lot like Sets except they only hold objets (whereas a Set can hold primitive values or objects), they aren't iterable, and they don't have a `.clear()` method. The reason WeakSets are built this way has to do with JavaScript memory allocation and what is called *garbage collection*. Basically, JavaScript frees up memory when values that have been previously created are no longer needed. This comes in handy with WeakSets because, when an object is deleted, the object will also be deleted from the WeakSet when garbage collection runs. This makes WeakSets useful in situations where you want an efficient, lightweight solution for creating groups of objects.
+
+That is a lot to take in and something I'm going to have to research further. [Here's MDN documentation on garbage collection](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management#Garbage_collection).
