@@ -913,3 +913,145 @@ for (const month of months) {
 As for WeakSets, they work a lot like Sets except they only hold objets (whereas a Set can hold primitive values or objects), they aren't iterable, and they don't have a `.clear()` method. The reason WeakSets are built this way has to do with JavaScript memory allocation and what is called *garbage collection*. Basically, JavaScript frees up memory when values that have been previously created are no longer needed. This comes in handy with WeakSets because, when an object is deleted, the object will also be deleted from the WeakSet when garbage collection runs. This makes WeakSets useful in situations where you want an efficient, lightweight solution for creating groups of objects.
 
 That is a lot to take in and something I'm going to have to research further. [Here's MDN documentation on garbage collection](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management#Garbage_collection).
+
+### Day 27
+The next section of the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) program was Maps and WeakMaps in ES6. This was pretty much a mirror image to yesterday's Sets and WeakSets. They both have similar methods and properties, they’re both iterable, and WeakMaps don’t prevent objects from being garbage collected. The difference is that Maps are collections of key-value pairs, whereas Sets are collections of unique values.
+
+##### Create a Map
+You can’t create a Map from a list of key-value pairs, so you will always have to create an empty Map to start:
+```
+const employees = new Map();
+console.log(employees);
+>> Map {}
+```
+
+##### Modify a Map
+You can use the `.set()`, `.delete()` and `.clear()` methods. Using the employees example from before:
+```
+employees.set('james.parkes@udacity.com', {
+    firstName: 'James',
+    lastName: 'Parkes',
+    role: 'Content Developer'
+});
+employees.set('julia@udacity.com', {
+    firstName: 'Julia',
+    lastName: 'Van Cleve',
+    role: 'Content Developer'
+});
+employees.set('richard@udacity.com', {
+    firstName: 'Richard',
+    lastName: 'Kalehoff',
+    role: 'Content Developer'
+});
+
+console.log(employees);
+>> Map {'james.parkes@udacity.com' => Object {...}, 'julia@udacity.com' => Object {...}, 'richard@udacity.com' => Object {...}}
+```
+
+```
+employees.delete('julia@udacity.com');
+employees.delete('richard@udacity.com');
+console.log(employees);
+>> Map {'james.parkes@udacity.com' => Object {firstName: 'James', lastName: 'Parkes', role: 'Course Developer'}}
+```
+
+```
+employees.clear()
+console.log(employees);
+>> Map {}
+```
+
+*NOTE: If you .set() a key-value pair to a Map that already uses the same key, you won’t receive an error, but the key-value pair will overwrite what currently exists in the Map. Also, if you try to .delete() a key-value that is not in a Map, you won’t receive an error, and the Map will remain unchanged.*
+
+##### Check if an item exists
+Exactly the same as sets, use the `.has()` method:
+```
+const members = new Map();
+
+members.set('Evelyn', 75.68);
+members.set('Liam', 20.16);
+members.set('Sophia', 0);
+members.set('Marcus', 10.25);
+
+console.log(members.has('Xavier'));
+console.log(members.has('Marcus'));
+>> false
+>> true
+```
+
+##### Retrieve an item
+Use the `.get()` method:
+```
+console.log(members.get('Evelyn'));
+>> 75.68
+```
+
+##### Loop through a Map
+There are three different options to choose from:
+1. Step through each key or value using the Map’s default iterator
+2. Loop through each key-value pair using the new for...of loop
+3. Loop through each key-value pair using the Map’s .forEach() method
+
+**USING THE MAPITERATOR**  
+Using both the `.keys()` and `.values()` methods on a Map will return a new iterator object called `MapIterator`. You can store that iterator object in a new variable and use `.next()` to loop through each key or value. **Which method you use will determine if your iterator has access to the Map’s keys or the Map’s values.**
+
+```
+let iteratorObjForKeys = members.keys();
+iteratorObjForKeys.next();
+Object {value: 'Evelyn', done: false}
+```
+
+Use .next() to the get the next key value.
+```
+iteratorObjForKeys.next();
+Object {value: 'Liam', done: false}
+```
+
+And so on.
+```
+iteratorObjForKeys.next();
+Object {value: 'Sophia', done: false}
+```
+
+On the flipside, use the `.values()` method to access the Map’s values, and then repeat the same process.
+```
+let iteratorObjForValues = members.values();
+iteratorObjForValues.next();
+Object {value: 75.68, done: false}
+```
+
+**USING A FOR…OF LOOP**
+```
+for (const member of members) {
+  console.log(member);
+}
+>> [‘Evelyn', 75.68]
+>> ['Liam', 20.16]
+>> ['Sophia', 0]
+>> ['Marcus', 10.25]
+```
+
+However, when you use a for...of loop with a Map, you don’t exactly get back a key or a value. Instead, the key-value pair is split up into an array where the first element is the key and the second element is the value. **You can use array destructuring to fix this!** ([See day 13 for notes on destructuring.](https://github.com/karakarakaraff/100-days-of-code#day-13))
+
+```
+for (const member of members) {
+  let [key, value] = member;
+  console.log(key, value);
+}
+>> Evelyn 75.68
+>> Liam 20.16
+>> Sophia 0
+>> Marcus 10.25
+```
+
+**USING A FOREACH LOOP**  
+Use the `.forEach()` method:
+```
+members.forEach((key, value) => console.log(key, value));
+>> ‘Evelyn' 75.68
+>> 'Liam' 20.16
+>> 'Sophia' 0
+>> 'Marcus' 10.25
+```
+
+Notice how, with the help of an arrow function, the `forEach` loop reads fairly straightforward: “For each `key` and `value` in `members`, log the `key` and `value` to the console.” Lovely!
