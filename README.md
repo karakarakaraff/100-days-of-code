@@ -1055,3 +1055,15 @@ members.forEach((key, value) => console.log(key, value));
 ```
 
 Notice how, with the help of an arrow function, the `forEach` loop reads fairly straightforward: “For each `key` and `value` in `members`, log the `key` and `value` to the console.” Lovely!
+
+### Day 28
+Today was a rest and recharge kind of day, so my dedicated time amounted to getting caught up on coding podcasts. I have a backlog of [Code Newbie](https://www.codenewbie.org/podcast) episodes that I downloaded awhile ago and am still working through. The ones still on my list to listen to are:
+* [Episode 22: Intro to UX w/ Catt Small](https://www.codenewbie.org/podcast/intro-to-ux)
+* [Episode 31: Girl Develop It w/ Corinne Warnshuis](https://www.codenewbie.org/podcast/girl-develop-it)
+* [Episode 46: Self-Taught Programmer w/ Courtney Ervin](https://www.codenewbie.org/podcast/self-taught-programmer)
+* [Episode 47: Design and Dev w/ Una Kravetz](https://www.codenewbie.org/podcast/design-and-dev)
+* [Episode 59: The GitHub Nomad w/ John Britton](https://www.codenewbie.org/podcast/the-github-nomad)
+
+I especially enjoy this podcast because it goes to show that there are soooooo many paths into the development/programming field, and once you're in, there are just as many different parts and pieces to that field. They have episodes on all kinds of technologies with people from all kinds of backgrounds, so it's both informative and inspiring at the same time.
+
+In addition to this list, I have another list of other coding podcasts I need to check out, but I haven't gotten that far yet. Maybe I'll give it a shot on my next recharge day!
