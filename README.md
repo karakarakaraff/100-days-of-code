@@ -1067,3 +1067,8 @@ Today was a rest and recharge kind of day, so my dedicated time amounted to gett
 I especially enjoy this podcast because it goes to show that there are soooooo many paths into the development/programming field, and once you're in, there are just as many different parts and pieces to that field. They have episodes on all kinds of technologies with people from all kinds of backgrounds, so it's both informative and inspiring at the same time.
 
 In addition to this list, I have another list of other coding podcasts I need to check out, but I haven't gotten that far yet. Maybe I'll give it a shot on my next recharge day!
+
+### Day 29 & Day 30 & Day 31
+Aaaaahhhhhh, my streak has been broken! I didn't have time for coding on these days, and I didn't even read about code or listen to any coding podcasts. Life got in the way, what can I say. However, it was for a good reason, and that reason's name is Bori: a Korean dog that Kevin and I adopted! She is a cute little Jeju/Shiba mix, and she flew from Jeju to Seoul to LAX, and Kevin went all the way to California to get her and drive her back to Colorado while Kilgore and I held down the fort. I've been cleaning and puppy-proofing the house, plus taking care of all the dog walking and cooking and everything else in addition to my full-time job, so it's fair to say my mind has been elsewhere.
+
+Because I'm in a group challenge, I'm continuing with my daily counts, but I'll be adding a days 101, 102 and 103 at the end to make up for these lost days.
