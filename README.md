@@ -1072,3 +1072,14 @@ In addition to this list, I have another list of other coding podcasts I need to
 Aaaaahhhhhh, my streak has been broken! I didn't have time for coding on these days, and I didn't even read about code or listen to any coding podcasts. Life got in the way, what can I say. However, it was for a good reason, and that reason's name is Bori: a Korean dog that Kevin and I adopted! She is a cute little Jeju/Shiba mix, and she flew from Jeju to Seoul to LAX, and Kevin went all the way to California to get her and drive her back to Colorado while Kilgore and I held down the fort. I've been cleaning and puppy-proofing the house, plus taking care of all the dog walking and cooking and everything else in addition to my full-time job, so it's fair to say my mind has been elsewhere.
 
 Because I'm in a group challenge, I'm continuing with my daily counts, but I'll be adding a days 101, 102 and 103 at the end to make up for these lost days.
+
+### Day 32
+Finally, I'm on to Promises! The [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) dives right into Promises, but as usual, I prefer to get their overview and supplement it with the documentation before jumping into the note taking and problem solving.
+
+Here's how they describe a Promise:
+
+> You go to an ice cream shop and tell the clerk you want a banana split. They take your order and give you a receipt. The receipt represents the fact that the clerk will return with something in the future. There’s no need for you to stand at the counter and wait — you can go find your seat, read a magazine, check your phone, whatever, while the clerk makes your banana split. When the clerk brings you your banana split, this is them notifying you that it’s ready. You can stop what you’re doing temporarily to take the split.
+
+**Going back and forth between making a request for something and the downtime while that request is being fulfilled, and being able to do work during that downtime and then being notified that the request is finished is what Promises do for us in JavaScript.** It's like saying, “Do this thing now, then notify me when it’s finished so I can pick up where I left off.”
+
+Here's the [MDN Promise documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), which covers how to build the Promise constructor function with `new Promise()`. I'll spend my free time this afternoon at work reading through this, then I'll work through the entire Promises lesson tomorrow.
