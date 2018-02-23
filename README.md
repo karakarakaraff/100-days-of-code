@@ -1165,3 +1165,127 @@ As you can see, the first function that's passed to `.then()` will be called and
 To sum it up: **Promises make asynchronous code easier to read, easier to write and, most importantly, easier to debug.**
 
 My thoughts on this overall: I had to use Promises in the offline-first mobile web project earlier in the course, and although I didn't fully understand them at the time, the simplicity of reading and writing them did make it pretty simple to look at an existing Promise and write my own, so that's pretty cool. I think reading up on some computer science would help a lot in understanding how asynchronous code really works, though.
+
+### Day 34
+Today was all about proxies and the traps used in the handler object. Proxies are a totally new thing for me, so this intro was really interesting. Thankfully, the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) lays it all out pretty simply, so I believe I have a very real understanding of proxies, even though it might not be a deep understanding. Again, this is where more computer science knowledge would probably be especially helpful.
+
+Anyway, with that being said, here are my notes!
+
+##### What is a proxy?
+A JavaScript proxy will let one object stand in for another object to handle all the interactions for that other object. The proxy can handle requests directly, pass data back and forth to the target object, and a whole bunch of other things.
+
+##### Create a proxy
+To create a proxy object, use the Proxy constructor, `new Proxy();`. The proxy constructor takes two items:
+* the object that it will be the proxy for
+* an object containing the list of methods it will handle for the proxied object
+
+The second object is called the **handler**.
+
+##### A pass-through proxy
+The simplest way to create a proxy is to provide an object and then an empty handler object.
+
+```
+var richard = {status: 'looking for work'};
+var agent = new Proxy(richard, {});
+agent.status;
+>> returns 'looking for work'
+```
+
+The above doesn't actually do anything special with the proxy — it just passes the request directly to the **source object**. If you want the proxy object to actually intercept the request, that's what the **handler object** is for.
+
+The key to making Proxies useful is the handler object that's passed as the second object to the Proxy constructor. The handler object is made up of methods that will be used for property access.
+
+##### Get trap
+The `get` trap is used to "intercept" calls to properties:
+
+```
+const richard = {status: 'looking for work'};
+const handler = {
+    get(target, propName) {
+        console.log(target); // the `richard` object, not `handler` and not `agent`
+        console.log(propName); // the name of the property the proxy (`agent` in this case) is checking
+    }
+};
+const agent = new Proxy(richard, handler);
+agent.status;
+>> logs out the richard object (not the agent object!) and the name of the property being accessed (`status`)
+```
+
+In the code above, the `handler` object has a `get` method (called a "trap" since it's being used in a Proxy). When the code `agent.status;` is run on the last line, because the `get` trap exists, it "intercepts" the call to get the `status` property and runs the `get` trap function. This will log out the target object of the proxy (the `richard` object) and then logs out the name of the property being requested (the `status` property). *And that's all it does! It doesn't actually log out the property! This is important — if a trap is used, you need to make sure you provide all the functionality for that specific trap.*
+
+##### Accessing the target object from inside the proxy
+If you wanted to actually provide the real result, you would need to return the property on the target object:
+
+```
+const richard = {status: 'looking for work'};
+const handler = {
+    get(target, propName) {
+        console.log(target);
+        console.log(propName);
+        return target[propName];
+    }
+};
+const agent = new Proxy(richard, handler);
+agent.status;
+>> (1)logs the richard object, (2)logs the property being accessed, (3)returns the text in richard.status
+```
+
+Notice the addition of `return target[propName];` as the last line of the `get` trap. This will access the property on the target object and will return it.
+
+##### Having the proxy return information directly
+Alternatively, you could use the proxy to provide direct feedback:
+
+```
+const richard = {status: 'looking for work'};
+const handler = {
+    get(target, propName) {
+        return `He's following many leads, so you should offer a contract as soon as possible!`;
+    }
+};
+const agent = new Proxy(richard, handler);
+agent.status;
+>> returns the text `He's following many leads, so you should offer a contract as soon as possible!`
+```
+
+With this code, the Proxy doesn't even check the target object, it just directly responds to the calling code.
+
+So the `get` trap will take over whenever any property on the proxy is accessed. If you want to intercept calls to *change* properties, then the `set` trap needs to be used.
+
+The `set` trap is used for intercepting code that will *change a property.* The `set` trap receives:
+* the object it proxies
+* the property that is being set
+* the new value for the proxy
+
+```
+const richard = {status: 'looking for work'};
+const handler = {
+    set(target, propName, value) {
+        if (propName === 'payRate') { // if the pay is being set, take 15% as commission
+            value = value * 0.85;
+        }
+        target[propName] = value;
+    }
+};
+const agent = new Proxy(richard, handler);
+agent.payRate = 1000; // set the actor's pay to $1,000
+agent.payRate; // $850 the actor's actual pay
+```
+
+In the code above, notice that the `set` trap checks to see if the `payRate` property is being set. If it is, then the proxy (the agent) takes 15 percent off the top for her own commission! Then, when the actor's pay is set to one thousand dollars, since the `payRate` property was used, the code took 15% off the top and set the actual `payRate` property to `850`.
+
+##### Other traps
+The `get` and `set` traps are probably what will be used most often, but there are actually a total of 13 different traps that can be used in a handler:
+
+* **the get trap** - lets the proxy handle calls to property access
+* **the set trap** - lets the proxy handle setting the property to a new value
+* **the apply trap** - lets the proxy handle being invoked (the object being proxied is a function)
+* **the has trap** - lets the proxy handle the using in operator
+* **the deleteProperty trap** - lets the proxy handle if a property is deleted
+* **the ownKeys trap** - lets the proxy handle when all keys are requested
+* **the construct trap** - lets the proxy handle when the proxy is used with the new keyword as a constructor
+* **the defineProperty trap** - lets the proxy handle when defineProperty is used to create a new property on the object
+* **the getOwnPropertyDescriptor trap** - lets the proxy handle getting the property's descriptors
+* **the preventExtenions trap** - lets the proxy handle calls to Object.preventExtensions() on the proxy object
+* **the isExtensible trap** - lets the proxy handle calls to Object.isExtensible on the proxy object
+* **the getPrototypeOf trap** - lets the proxy handle calls to Object.getPrototypeOf on the proxy object
+* **the setPrototypeOf trap** - lets the proxy handle calls to Object.setPrototypeOf on the proxy object
