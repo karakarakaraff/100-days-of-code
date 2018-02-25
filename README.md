@@ -1343,6 +1343,23 @@ proxyObj.weight = 120; // set a new property on the object
 proxyObj.weight; // logs 'getting the weight property' & 120
 ```
 
-A weight property was added to the proxy object, and when it was later retrieved, it displayed a log message!
+A `weight` property was added to the proxy object, and when it was later retrieved, it displayed a log message!
 
 Some functionality of proxy objects may seem similar to existing ES5 getter/setter methods. But with proxies, you do not need to initialize the object with getters/setters for each property when the object is initialized.
+
+##### TO SUM IT UP:
+A proxy object sits between a real object and the calling code. The calling code interacts with the proxy instead of the real object. To create a proxy:
+
+* use the `new Proxy()` constructor
+  * pass the object being proxied as the first item
+  * the second object is a handler object
+* the handler object is made up of 1 of 13 different "traps"
+* a trap is a function that will intercept calls to properties let you run code
+* if a trap is not defined, the default behavior is sent to the target object
+
+### Day 36
+Wow, I can't believe I'm already starting the 6th week of the challenge! Looking at my progress, I've come a really long way with the [Google Scholars/Udacity intermediate mobile web development course](https://blog.udacity.com/2017/10/udacity-google-announce-50000-new-scholarships.html) and only have a couple hours left. I broke my streak with the adoption of a new puppy, but c'mon, IT'S A PUPPY. Most importantly, I achieved my goal of making a career change and getting a developer job, which starts tomorrow. Hurray!
+
+My hour today will be much the same as previous Sundays when I meet with the others in our group who are doing this challenge. It should b an exciting week because everyone can make it this time! One challenger will give an update on the end of his coding bootcamp, the job hunt and his portfolio website; another will tell us how his bootcamp is going and what he's currently learning; another will show us her progress on her portfolio website and share her experience with the job hunt so far; another is coming to listen more than share since she broke her streak, which is totally cool; and I suppose I'll talk about what I expect to happen on the first day of my new job. I'll probably talk about the puppy, too, because (as has already been said) c'mon, IT'S A PUPPY.
+
+All of this while drinking a fancy chai tea latte on a sunny day. You really couldn't ask for much more.
